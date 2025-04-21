@@ -1,34 +1,32 @@
-Qwen2-VL-2B Fine-Tuning: Human or Animal Image Classification
-=============================================================
 
-Overview
---------
-This project demonstrates how the Qwen2-VL-2B model was fine-tuned to classify images as either human or specific animals (gorilla, dog, cat).
+🧠 Qwen2-VL-2B Finetuning: Human or Animal Image Classification
 
-Base Model: Qwen2-VL-2B from Hugging Face  
-Fine-tuned using: LLaMA-Factory  
-Exported Model: Kaushika04/qwen2vl_2b_instruct_lora_merged_HUMAN_OR_ANIMAL_IMAGE_FINETUNING_kaushika
+This project demonstrates the finetuning and evaluation of the Qwen2-VL-2B model on a custom image dataset to identify whether the subject in an image is a human or a specific animal (gorilla, dog, cat). The model was finetuned using LLaMA-Factory, exported to Hugging Face, and evaluated with 100% accuracy on a structured test set.
 
-Finetuning Summary
-------------------
-- Total Training Epochs: 100
-- Used LLaMA-Factory to extract LoRA tensors post-training
-- Exported model to Hugging Face profile
-- Evaluation performed using the Hugging Face Transformers library
-- Generated output text was overlayed onto images using the PIL (Python Imaging Library)
+📍 Hugging Face Model:
+👉 https://huggingface.co/Kaushika04/qwen2vl_2b_instruct_lora_merged_HUMAN_OR_ANIMAL_IMAGE_FINETUNING_kaushika
 
-Dataset Preprocessing
----------------------
-The dataset used for training included 80 images in total:
+📦 Project Structure:
+.
+├── Human_Animal_Classification.ipynb   # Main evaluation notebook
+├── test_dataset/                       # Test images (1.jpg to 12.jpg)
+└── kaushika/                           # Finetuned dataset images
+
+🧪 Model Details:
+- Base Model: Qwen2-VL-2B (https://huggingface.co/Qwen/Qwen2-VL-2B)
+- Framework: LLaMA-Factory
+- Epochs Trained: 100
+- Exported To: https://huggingface.co/Kaushika04
+- Evaluation Interface: Hugging Face Transformers + Custom VQA Dataset
+
+🗂️ Dataset Preprocessing:
+The dataset used for fine-tuning contains a total of 80 images, divided equally among four classes:
 - 20 images of gorillas
 - 20 images of dogs
 - 20 images of cats
 - 20 images of humans
 
-All images were annotated in VQA (Visual Question Answering) format.
-
-Example VQA JSON structure:
-
+Each image was annotated using the VQA (Visual Question Answering) format. Example:
 {
   "messages": [
     {
@@ -45,39 +43,37 @@ Example VQA JSON structure:
   ]
 }
 
-Evaluation
-----------
-Test dataset used: 12 images
-- Images 1-8: Question = "What is this?"
-- Images 9-12: Question = "Who is this?"
+🧪 Evaluation Results:
+✅ Accuracy: 100.00% on 12 test images
 
-Evaluation Accuracy:
-- Correct Predictions: 12/12
-- Final Accuracy: 100%
+| Image  | Prediction                      |
+|--------|----------------------------------|
+| 1.jpg  | This is an animal - gorilla.    |
+| 2.jpg  | This is an animal - gorilla.    |
+| 3.jpg  | This is an animal - dog.        |
+| 4.jpg  | This is an animal - dog.        |
+| 5.jpg  | This is an animal - cat.        |
+| 6.jpg  | This is an animal - cat.        |
+| 7.jpg  | This is an animal - dog.        |
+| 8.jpg  | This is an animal - gorilla.    |
+| 9.jpg  | This is HUMAN.                  |
+| 10.jpg | This is HUMAN.                  |
+| 11.jpg | This is HUMAN.                  |
+| 12.jpg | This is HUMAN.                  |
 
-Challenges
-----------
-- Training was done in Google Colab with limited GPU resources
-- Out of Memory (OOM) errors occurred during text generation and saving outputs with PIL
-- Optimized code to manage memory constraints during inference
+🖼️ Visualization:
+After generating text responses for each image, the text was written directly onto the image using the PIL (Python Imaging Library), making the predictions visually interpretable.
 
-Project Structure
------------------
-- Human_Animal_Classification.ipynb : Main notebook
-- kaushika/ : Sample input images
-- test_dataset/ : Contains evaluation images
+⚠️ Challenges Faced:
+- Training on Google Colab resulted in Out of Memory (OOM) issues, especially when generating and saving large batches of images with overlaid text.
+- The batch sizes were reduced, and intermediate image outputs were cached to mitigate GPU limits.
 
-Requirements
-------------
-- torch
-- transformers
-- PIL (Pillow)
+🚀 Requirements:
+Install necessary dependencies:
+pip install torch torchvision transformers pillow
 
-Install using pip:
-
-    pip install torch torchvision transformers pillow
-
-Conclusion
-----------
-This project successfully fine-tuned Qwen2-VL-2B to distinguish between human and animal images, achieving 100% accuracy on the test set.
+✨ Credits:
+- Qwen2-VL-2B by Alibaba Cloud
+- LLaMA-Factory for model finetuning
+- Kaushika04 on Hugging Face for hosting the finetuned model
 
