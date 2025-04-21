@@ -61,6 +61,13 @@ Each image was annotated using the VQA (Visual Question Answering) format. Examp
 | 11.jpg | This is HUMAN.                  |
 | 12.jpg | This is HUMAN.                  |
 
+
+<br>
+    <div align="center">
+      <img src="output.jpg" alt="Local Temperature Prediction Plot" width="75%">
+      <br><i>OUTPUT IMAGE.</i>
+    </div>
+    
 🖼️ Visualization:
 After generating text responses for each image, the text was written directly onto the image using the PIL (Python Imaging Library), making the predictions visually interpretable.
 
